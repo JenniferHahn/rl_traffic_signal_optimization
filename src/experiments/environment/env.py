@@ -17,13 +17,13 @@ else:
 
 from sumolib import checkBinary
 
-#import gymnasium as gym
-import gym
+import gymnasium as gym
+#import gym
 import numpy as np
 import pandas as pd
 import sumolib
 #import traci
-from gym.utils import EzPickle, seeding
+from gymnasium.utils import EzPickle, seeding
 from pettingzoo import AECEnv
 from pettingzoo.utils import agent_selector, wrappers
 from pettingzoo.utils.conversions import parallel_wrapper_fn
@@ -163,6 +163,7 @@ class SumoEnvironment(gym.Env):
         
         #test with one traffic lights
         self.ts_ids = ['cluster_1743822458_1743822558_1743822643_1743822689_1743822737_8039877991_cluster_1120310798_1634545540_1665161322_1665161338_1665161344_1743822496_1743822510_1743822551_1743822648_1743822650_1743822666_1743822667_1743822676_1743822687_1754245066_1756301705_1949670169_2004844603_297701075_412123597_412123598_412123601_412181181']
+        
         self.observation_class = observation_class
 	
 	#self.ts_ids = list(conn.trafficlight.getIDList())

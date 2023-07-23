@@ -20,8 +20,8 @@ if platform.system() != "Linux":
 else:
     import libsumo as traci
 import numpy as np
-#from gymnasium import spaces
-from gym import spaces
+from gymnasium import spaces
+#from gym import spaces
 
 
 class TrafficSignal:
@@ -226,7 +226,7 @@ class TrafficSignal:
     # TODO : implement emission reward for specific crossing?
     
     def _noise_emission_reward(self):
-        return -self.get_average_noise_emission
+        return -self.get_average_noise_emission()
     
 
     def _observation_fn_default(self):
@@ -573,6 +573,6 @@ class TrafficSignal:
         "pressure": _pressure_reward,
         "CO2_emission": _CO2_emission_reward,
         "combined_emission": _average_emission_reward,
-        "noise_emission": _noise_emission_reward,
+        "noise_emission": _noise_emission_reward
     }
 
