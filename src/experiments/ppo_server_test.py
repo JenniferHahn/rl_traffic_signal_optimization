@@ -35,38 +35,43 @@ env = SumoEnvironment(
                 urban_mobility_simulation/models/20230502_SUMO_MA/osm.truck.trips.xml, \
                urban_mobility_simulation/models/20230502_SUMO_MA/pt/ptflows.rou.xml, \
                 urban_mobility_simulation/models/20230502_SUMO_MA/osm.passenger.trips.xml", 
-    out_csv_name="urban_mobility_simulation/src/data/model_outputs/ppo_orig_43200",
+    out_csv_name="urban_mobility_simulation/src/data/model_outputs/ppo_orig_1",
     use_gui=False,
-    num_seconds=20000,
+    num_seconds=43200,
     yellow_time=4,
     min_green=5,
     max_green=60,
     time_to_teleport=300,
     fixed_ts=False,
-#    additional_sumo_cmd="--scale 0.5",
+#    additional_sumo_cmd="--scale 0.75",
 #    begin_time=10000,
 )
 
 model = PPO(
     env=env,
-    policy="MlpPolicy",
-    learning_rate=3e-4,
-    verbose=1,
-#    gamma=0.95,
-#    gae_lambda=0.9,
-#    ent_coef=0.1,
-#    vf_coef=0.25,
-#    batch_size=64
+    policy="MultiInputPolicy",
+    verbose=3,
+    gamma=0.95,
+    n_steps=256,
+    ent_coef=0.0905168,
+    learning_rate=0.00062211,
+    vf_coef=0.042202,
+    max_grad_norm=0.9,
+    gae_lambda=0.99,
+    n_epochs=5,
+    clip_range=0.3,
+    batch_size=256,
 )
+
 # Paths:
-save_path = 'PPO_20000_orig'
-log_path = 'Logs'
+save_path = 'PPO_20000_orig_1'
+log_path = 'Logs_1'
 
 print(env.observation_space)
 print(env.action_space)
 print(env.action_space.sample())
 
-model.learn(total_timesteps=20000)
+model.learn(total_timesteps=43200)
 
 model.save(save_path)
 

@@ -162,7 +162,7 @@ class SumoEnvironment(gym.Env):
         #self.ts_ids = list(conn.trafficlight.getIDList())
         
         #test with one traffic lights
-        self.ts_ids = ['tls_160', 'tls_160', 'tls_159']
+        self.ts_ids = ['tls_161', 'tls_160']#, 'tls_159']
         
         self.observation_class = observation_class
 	

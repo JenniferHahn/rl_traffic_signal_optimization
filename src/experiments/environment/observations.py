@@ -40,6 +40,7 @@ class DefaultObservationFunction(ObservationFunction):
         density = self.ts.get_lanes_density()
         queue = self.ts.get_lanes_queue()
         observation = np.array(phase_id + min_green + density + queue, dtype=np.float32)
+        print('Observation: ', observation)
         return observation
 
     def observation_space(self) -> spaces.Box:
