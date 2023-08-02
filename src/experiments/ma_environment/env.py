@@ -154,12 +154,13 @@ class SumoEnvironment(gym.Env):
         SumoEnvironment.CONNECTION_LABEL += 1
         self.sumo = None
 
-        if LIBSUMO:
-            traci.start([sumolib.checkBinary("sumo"), "-n", self._net])  # Start only to retrieve traffic light information
-            conn = traci
-        else:
-            traci.start([sumolib.checkBinary("sumo"), "-n", self._net], label="init_connection" + self.label)
-            conn = traci.getConnection("init_connection" + self.label)
+        #if LIBSUMO:
+        traci.start([sumolib.checkBinary("sumo"), "-n", self._net])  # Start only to retrieve traffic light information
+        conn = traci
+        
+        #else:
+        #    traci.start([sumolib.checkBinary("sumo"), "-n", self._net], label="init_connection" + self.label)
+        #    conn = traci.getConnection("init_connection" + self.label)
 
         #self.ts_ids = list(conn.trafficlight.getIDList())
         self.ts_ids = ['tls_160', 'tls_161', 'tls_159']
@@ -241,12 +242,12 @@ class SumoEnvironment(gym.Env):
                 self.disp.start()
                 print("Virtual display started.")
 
-        if LIBSUMO:
-            traci.start(sumo_cmd)
-            self.sumo = traci
-        else:
-            traci.start(sumo_cmd, label=self.label)
-            self.sumo = traci.getConnection(self.label)
+        #if LIBSUMO:
+        traci.start(sumo_cmd)
+        self.sumo = traci
+        #else:
+        #    traci.start(sumo_cmd, label=self.label)
+        #    self.sumo = traci.getConnection(self.label)
 
         if self.use_gui or self.render_mode is not None:
             self.sumo.gui.setSchema(traci.gui.DEFAULT_VIEW, "real world")
@@ -444,8 +445,8 @@ class SumoEnvironment(gym.Env):
         if self.sumo is None:
             return
 
-        if not LIBSUMO:
-            traci.switch(self.label)
+        #if not LIBSUMO:
+        #    traci.switch(self.label)
         traci.close()
 
         if self.disp is not None:
